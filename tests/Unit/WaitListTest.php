@@ -101,6 +101,7 @@ class WaitListTest extends TestCase
         $this->assertEmpty(Subscriber::all());
     }
 
+
     /** @test */
     public function people_who_have_unsubscribed_before_will_enable_their_old_subscription_when_subscribing_again()
     {
@@ -143,7 +144,7 @@ class WaitListTest extends TestCase
         $subscription = factory(Subscriber::class)->create(['email' => 'igeoluwasegun363@gmail.com']);
         SendSubscriptionConfirmation::dispatch($subscription);
         Mail::assertQueued(SubscriberJoined::class, function ($mail) {
-            return $mail->hasTo('igeoluwasegun363@gmail.com');
+            return $mail->hasTo('hello@example.com');
         });
     }
 
@@ -158,71 +159,4 @@ class WaitListTest extends TestCase
         $mail = (new SubscriberJoined($subscription))->build();
         $this->assertNull($mail->view);
     }
-
-
-    // use MailTracking;
-    // /**@test*/
-    // public function testBasicExample()
-    // {
-
-    //     $this->visit('/subscribe')
-    //         ->seeEmailsEquals("Hello world")
-    //         ->seeEmailContains("Hello")
-    //         ->seeEmailSubjectEquals("Someone joined the waitlist")
-    //         ->seeEmailReplyToEquals("igeoluwasegun@gmail.com");
-    // }
-
-
-
-    // /**@test */
-    // public function testUserCanViewAnIndexPage()
-    // {
-    //     $response = $this->get('/');
-    //     $response->assertSuccessful();
-    //     $response->assertViewIs('waitlist');
-    //     // $response->assertStatus(200);
-    // }
-
-
-    // /** @test */
-    // public function testIndexDislayTheSubscribeForm()
-
-    // {
-    //     $response = $this->get(route('waitlist'));
-
-    //     $response->assertStatus(200);
-    //     $response->assertViewIs('waitlist');
-    // }
-
-    // /** @test */
-    // public function testTheEmailIsRequired()
-    // {
-    //     $response = $this->post('/', []);
-
-    //     $response->assertStatus(302);
-    //     $response->assertSessionHasErrors('email');
-    //     // $response->assertEmpty(Subscriber::all());
-    // }
-
-    // /** @test */
-    // public function testTheEmailMustBeAValidAddress()
-    // {
-    //     $response = $this->post('/', ['email' => 'rubbish@gmail.com']);
-    //     $response->assertStatus(302);
-    //     $response->assertSessionHasErrors('email');
-    //     // $this->assertEmpty(Subscriber::all());
-    // }
 }
-// Mail::raw('Hello world', function ($message) {
-        //     $message->subject('Someone joined the waitlist');
-        //     $message->replyTo('igeoluwasegun@gmail.com');
-        //     $message->to('igeoluwasegun363@gmail.com');
-        //     $message->from('imoleolu2012@gmail.com');
-        // });
-
-        // Mail::raw('Hello world', function ($message) {
-        //     $message->to('igeoluwasegun363@gmail.com');
-        //     $message->from('imoleolu2012@gmail.com');
-        // });
-
-        // $this->seeEmailsSent(2)
