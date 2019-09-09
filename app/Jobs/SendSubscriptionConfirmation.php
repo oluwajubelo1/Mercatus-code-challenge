@@ -33,7 +33,7 @@ class SendSubscriptionConfirmation implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->subscription->email)->send(
+        Mail::to(config('mail.from.address'))->send(
             new SubscriberJoined($this->subscription)
         );
     }
