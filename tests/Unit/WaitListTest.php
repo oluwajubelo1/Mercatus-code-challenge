@@ -103,7 +103,7 @@ class WaitListTest extends TestCase
 
 
     /** @test */
-    public function people_who_have_unsubscribed_before_will_enable_their_old_subscription_when_subscribing_again()
+    public function people_who_have_unsubscribed_before_will_renable_their_old_subscription_when_subscribing_again()
     {
         Queue::fake();
         factory(Subscriber::class)->create(['email' => 'john@example.com', 'deleted_at' => Carbon::now()]);
